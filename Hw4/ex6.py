@@ -1,14 +1,15 @@
-def fibo(num):
-    first = 0
-    second = 1
-    result = [0]
-    print('Fibonacci series is')
-    for i in range(0,num):
-        third = first + second
-        #print(second)
-        result.append(second)
-        first = second
-        second = third
-    print(result)
-    return
-print(fibo(7))
+prices = {'banana': 4,
+'apple': 2,
+'orange': 1.5,
+'pear': 3}
+
+stock = {'banana': 6,
+'apple': 0,
+'orange': 32,
+'pear': 15}
+
+for key in stock:
+    # for key1 in stock:
+    print(key)
+    print('price:', prices[key] )
+    print('stock:', stock[key])
