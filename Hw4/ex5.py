@@ -4,4 +4,4 @@ time = int(input('How much time in minutes will we wait: '))
 real_time = time / 2
 
 total = bar * congboi ** (real_time)
-print(int(total))
+print('After', time, 'minutes, we would have',int(total),'barterias')
