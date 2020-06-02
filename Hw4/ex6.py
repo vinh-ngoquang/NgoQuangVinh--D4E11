@@ -8,11 +8,11 @@ stock = {'banana': 6,
 'orange': 32,
 'pear': 15}
 
-# for key in prices:
-#     # for key1 in stock:
-#     print(key)
-#     print('price:', prices[key] )
-#     print('stock:', stock[key])
+for key in prices:
+    # for key1 in stock:
+    print(key)
+    print('price:', prices[key] )
+    print('stock:', stock[key])
 
 
 total = 0

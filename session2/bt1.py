@@ -13,6 +13,5 @@ elif delta == 0:
     print(x)
 else:
     print('Vo nghiem')
-break
 
    
