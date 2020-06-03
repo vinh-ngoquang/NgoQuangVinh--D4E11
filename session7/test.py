@@ -7,9 +7,9 @@ db = mongo_client.get_database('Restaurant')
 
 collection = db.get_collection('film')
 
-movies =  collection.find()
-for movie in movies:
-    print(movie)
+
+
+
 client = pymysql.connect(
     host = 'localhost',
     user = 'root',
@@ -43,3 +43,11 @@ cursor = client.cursor()
 # )
 # ''')
 
+movies =  collection.find()
+for movie in movies:
+    # cursor.execute(f'''
+    # insert into film.movies
+    # (title, writer, year)
+    # VALUES (, 'dasfs', '1998')
+    # ''')
+    print(movie['title'])
