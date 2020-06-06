@@ -1,53 +1,92 @@
+
 import pymysql
-import pymongo
+from pymongo import MongoClient
 
-mongo_client = pymongo.MongoClient()
-
-db = mongo_client.get_database('Restaurant')
-
-collection = db.get_collection('film')
+mongo_client = MongoClient()
+mongo_db = mongo_client.get_database('Movie')
+movie_collection = mongo_db.get_collection('films')
 
 
-
-
-client = pymysql.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'matbonchuc',
-    cursorclass = pymysql.cursors.DictCursor
+mysql_client = pymysql.connect(
+  host='localhost',
+  user='root',
+  password='matbonchuc',
+  cursorclass=pymysql.cursors.DictCursor
 )
-
-cursor = client.cursor()
-# cursor.execute('create database film')
-
+cursor = mysql_client.cursor()
 # cursor.execute('''
-# create table film.movies(
-#     id int(11) auto_increment primary key,
-#     title varchar(255),
-#     writer varchar(255),
-#     year int(11)
-# )
+#   CREATE TABLE IF NOT EXISTS movie.movie(
+#     id VARCHAR(255) PRIMARY KEY,
+#     title VARCHAR(255),
+#     writer VARCHAR(255),
+#     year VARCHAR(255)
+#   )
+# ''')
+# cursor.execute('''
+#   CREATE TABLE IF NOT EXISTS movie.actor(
+#     name VARCHAR(255) PRIMARY KEY
+#   )
 # ''')
 
 # cursor.execute('''
-# create table film.actors(
-#     name varchar(255)
-# )
+#   CREATE TABLE IF NOT EXISTS movie.movie_actor(
+#     movie_id VARCHAR(255),
+#     actor_name VARCHAR(255),
+#     PRIMARY KEY(movie_id, actor_name)
+#   )
 # ''')
 
-# cursor.execute('''
-# create table film.movie_actors(
-# id int(11),
-# name varchar(255),
-# PRIMARY KEY (id,name)
-# )
-# ''')
+query = {
+  'title': {'$ne': None},
+  'writer': {'$ne': None},
+  'year': {'$ne': None},
+  'actors': {'$ne': None}
+}
+# for movie in movie_collection.find(query):
+#  # EXTRACT
+#   # TRANSFORM
+#   movie_id = str(movie['_id'])
+#   movie_title = movie['title']
+#   movie_writer = movie['writer']
+#   movie_year = movie['year']
+#   # LOAD
+#   cursor.execute(f'''
+#     INSERT INTO movie.movie(id, title, writer, year)
+#     VALUES ('{movie_id}', '{movie_title}', '{movie_writer}', '{movie_year}')
+#   ''')
 
-movies =  collection.find()
-for movie in movies:
-    # cursor.execute(f'''
-    # insert into film.movies
-    # (title, writer, year)
-    # VALUES (, 'dasfs', '1998')
-    # ''')
-    print(movie['title'])
+
+# query = [
+#  {
+#     '$match': {
+#         'actors': {'$ne': None}
+#     }
+#   },
+#   {
+#       '$unwind': '$actors'
+#   },
+#   {
+#     '$group': {
+#       '_id': '$actors', 
+#     }
+#   }
+# ]
+# for actor in movie_collection.aggregate(query):
+#   cursor.execute(f'''
+#     INSERT INTO movie.actor(name)
+#     VALUES('{actor['_id']}')
+#   ''')
+
+for movie in movie_collection.find(query):
+  for actor in movie['actors']:
+    print(movie['_id'], actor)
+    cursor.execute(f'''
+      INSERT INTO movie.movie_actor(movie_id, actor_name)
+      VALUES('{str(movie['_id'])}', '{actor}')
+    ''')
+
+  
+
+
+
+mysql_client.commit()

@@ -2,9 +2,9 @@ from pymongo import MongoClient
 
 client = MongoClient()
 
-db = client.get_database('Restaurant')
+db = client.get_database('Movie')
 
-collection = db.get_collection('film')
+collection = db.get_collection('films')
 
 
 data = [
@@ -66,13 +66,13 @@ data = [
 'franchise' : 'The Hobbit'
 },
 {
-'title' : "Pee Wee Herman's Big Adventure",
+'title' : "Pee Wee Hermans Big Adventure",
 },
 {
 'title' : 'Avatar',
 },
 ]
-# collection.insert_many(data)
+collection.insert_many(data)
 
 ######
 
@@ -104,51 +104,51 @@ data = [
 
 ########
 
-user = [
-{
-'username' : 'GoodGuyGreg',
-'first_name' : 'Good Guy',
-'last_name' : 'Greg'
-},
-{
-'username' : 'ScumbagSteve',
-'full_name' : {
-'first' : 'Scumbag',
-'last' : 'Steve'}
-}
-]
+# user = [
+# {
+# 'username' : 'GoodGuyGreg',
+# 'first_name' : 'Good Guy',
+# 'last_name' : 'Greg'
+# },
+# {
+# 'username' : 'ScumbagSteve',
+# 'full_name' : {
+# 'first' : 'Scumbag',
+# 'last' : 'Steve'}
+# }
+# ]
 
-# collection.insert_many(user)
+# # collection.insert_many(user)
 
-post = [
-{
-'username' : 'GoodGuyGreg',
-'title' : 'Passes out at party',
-'body' : 'Wakes up early and cleans house',
-},
-{
-'username' : 'GoodGuyGreg',
-'title' : 'Steals your identity',
-'body' : 'Raises your credit score'
-},
-{
-'username' : 'GoodGuyGreg',
-'title' : 'Reports a bug in your code',
-'body' : 'Sends you a Pull Request'
-},
-{
-'username' : 'ScumbagSteve',
-'title' : 'Borrows something',
-'body' : 'Sells it'
-},
-{
-'username' : 'ScumbagSteve',
-'title' : 'Borrows everything',
-'body' : 'The end'
-},
-{
-'username' : 'ScumbagSteve',
-'title' : 'Forks your repo on github',
-'body' : 'Sets to private
-}]
-collection.insert_many(post)
+# post = [
+# {
+# 'username' : 'GoodGuyGreg',
+# 'title' : 'Passes out at party',
+# 'body' : 'Wakes up early and cleans house',
+# },
+# {
+# 'username' : 'GoodGuyGreg',
+# 'title' : 'Steals your identity',
+# 'body' : 'Raises your credit score'
+# },
+# {
+# 'username' : 'GoodGuyGreg',
+# 'title' : 'Reports a bug in your code',
+# 'body' : 'Sends you a Pull Request'
+# },
+# {
+# 'username' : 'ScumbagSteve',
+# 'title' : 'Borrows something',
+# 'body' : 'Sells it'
+# },
+# {
+# 'username' : 'ScumbagSteve',
+# 'title' : 'Borrows everything',
+# 'body' : 'The end'
+# },
+# {
+# 'username' : 'ScumbagSteve',
+# 'title' : 'Forks your repo on github',
+# 'body' : 'Sets to private
+# }]
+# collection.insert_many(post)
