@@ -43,13 +43,13 @@ for y in range(9):
     print(len(data['stats']['content']))
     for i in range(len(data['stats']['content'])):
         l.append([data['stats']['content'][i]['owner']['playerId'],data['stats']['content']['value']])
-        #print(l)
+    
     exec(f"{criteria[y]} = pd.DataFrame(l,columns = ['player_id','{criteria[y]}'])")
 
 
 general = [clean_sheet,goals_conceded,saves,penalty_save,punches,total_high_claim,total_keeper_sweeper,keeper_throws,goal_kicks]
 general = reduce(lambda x, y: pd.merge(x, y, left_on = 'player_id',right_on = 'player_id', how = 'outer'), general)
 general = general.fillna(0)
-general.to_csv('C:/Users/vinhsoo/Desktop/D4E/general1.csv',index = False)
+general.to_csv('C:/Users/vinhsoo/Desktop/D4E/general.csv',index = False)
 
 
